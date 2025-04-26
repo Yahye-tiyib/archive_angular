@@ -1,0 +1,42 @@
+<div *ngIf="box" class="modal  show" id="modifyBoxModal" tabindex="-1" aria-labelledby="modifyBoxLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modifier la Box</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="updateBox()">
+          <div class="mb-3">
+            <label class="form-label">Mois</label>
+            <input type="text" class="form-control" [(ngModel)]="box.mois" name="mois" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Année</label>
+            <input type="number" class="form-control" [(ngModel)]="box.annee" name="annee" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Nom</label>
+            <input type="text" class="form-control" [(ngModel)]="box.nom" name="nom" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Date Début</label>
+            <input type="date" class="form-control" [(ngModel)]="box.dateDebut" name="dateDebut" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Date Fin</label>
+            <input type="date" class="form-control" [(ngModel)]="box.dateFin" name="dateFin" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Statut</label>
+            <select class="form-select" [(ngModel)]="box.statut" name="statut" required>
+              <option value="OUVERTE">OUVERTE</option>
+              <option value="CLOTUREE">CLOTUREE</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-success">Enregistrer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

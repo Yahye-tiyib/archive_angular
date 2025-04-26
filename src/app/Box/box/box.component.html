@@ -1,0 +1,42 @@
+<app-ajouter-box 
+  (boxAdded)="onBoxAdded($event)"
+  (boxGenerated)="onBoxUpdated()"> <!-- ajoute ceci -->
+</app-ajouter-box>
+
+<app-modifier-box 
+  [box]="selectedBox" 
+  (boxUpdated)="onBoxUpdated()">
+</app-modifier-box>
+
+<div class="containere1">
+  <h2>Liste des Box Mensuelles</h2>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Nom</th>
+          <th>Mois</th>
+          <th>Année</th>
+          <th>Date Début</th>
+          <th>Date Fin</th>
+          <th>Statut</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let box of boxes">
+          <td>{{ box.nom }}</td>
+          <td>{{ box.mois }}</td>
+          <td>{{ box.annee }}</td>
+          <td>{{ box.dateDebut }}</td>
+          <td>{{ box.dateFin }}</td>
+          <td>{{ box.statut }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm mr-4" (click)="openModal(box)">Modifier</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteBox(box.id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

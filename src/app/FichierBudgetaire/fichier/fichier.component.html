@@ -1,0 +1,37 @@
+<div class="containere1">
+  <h2>Liste des Fichiers Budgétaires</h2>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Nom du fichier</th>
+          <th>Fichier</th>
+          <th>Date de Réception</th>
+          <th>Traité</th>
+          <th>État</th>
+          <th>Box liée</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fichier of fichiers">
+          <td>{{ fichier.nomfichier }}</td>
+          <td>
+            <!-- Lien vers le fichier avec target="_blank" pour ouvrir dans un nouvel onglet -->
+            <a [href]="getFichierUrl(fichier.fichier)" target="_blank">
+              Ouvrir le fichier
+            </a>
+          </td>
+          <td>{{ fichier.dateReception }}</td>
+          <td>{{ fichier.traiter ? 'Oui' : 'Non' }}</td>
+          <td>{{ fichier.etat ? 'Valide' : 'Invalide' }}</td>
+          <td>{{ fichier.box?.nom || 'Non assignée' }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm mr-4" >Modifier</button>
+            <button class="btn btn-danger btn-sm" >Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
