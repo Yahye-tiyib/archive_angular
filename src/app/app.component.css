@@ -24,7 +24,7 @@
   font-weight: bold;
 }
 .elements{
-  width: 30%;
+  width: 45%;
   display: flex;
   padding-right: 10px;
   flex-direction: row;
@@ -55,6 +55,7 @@
   color: black;
   width: 30%;
   height: 6vh;
+  margin-right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;

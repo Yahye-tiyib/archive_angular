@@ -3,34 +3,40 @@ import { isPlatformBrowser } from '@angular/common';
 import { AjouterBoxComponent } from '../ajouter-box/ajouter-box.component';
 import { ModifierBoxComponent } from '../modifier-box/modifier-box.component';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { BoxService } from '../../services/box.service';
+import { FichierService } from '../../services/fichier.service';
 
 @Component({
   selector: 'app-box',
   templateUrl: './box.component.html',
   styleUrls: ['./box.component.css'],
   standalone: true,
-  imports: [CommonModule, AjouterBoxComponent, ModifierBoxComponent]
+  imports: [CommonModule, AjouterBoxComponent, ModifierBoxComponent,FormsModule]
 })
 export class BoxComponent {
   boxes: any[] = [];
   selectedBox: any = null;
 
+
   constructor(
     private boxService: BoxService,
+    private fichierService: FichierService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit() {
     this.loadBoxes();
   }
-
+  
   loadBoxes() {
     this.boxService.getAllBoxes().then(data => {
       this.boxes = data;
-      console.log(data)
     }).catch(err => console.error(err));
   }
+
+  
+
 
   openModal(box: any) {
     if (isPlatformBrowser(this.platformId)) {

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class BoxService {
 
-  private baseUrl = 'http://localhost:8076/api/box';
+  private baseUrl = 'http://localhost:8070/api/box';
 
   constructor() { }
 
@@ -53,6 +53,13 @@ export class BoxService {
       throw err;  // Relance l'erreur pour la capturer dans le composant
     });
   }
+  async getAllBoxesByYear(annee: number): Promise<any[]> {
+    const response = await fetch(`${this.baseUrl}/boxes_year?annee=${annee}`);
+    if (!response.ok) {
+      throw new Error('Erreur lors du chargement des Box');
+    }
+    return await response.json();
+  }
   
   
 
@@ -62,4 +69,24 @@ export class BoxService {
       method: 'DELETE'
     }).then(() => {});
   }
+  getBoxById(boxId: number): Promise<any> {
+    const url = `http://localhost:8070/api/box/${boxId}`;
+  
+    return fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Erreur HTTP: ${response.status}`);
+        }
+        return response.json();  // Parse la réponse JSON
+      })
+      .then(data => {
+        console.log('Box récupéré:', data);  // Vérifie la réponse du backend
+        return data;  // Retourne les détails du box
+      })
+      .catch(error => {
+        console.error('Erreur lors de la récupération du box :', error);
+        throw error;  // Gère l'erreur
+      });
+  }
+  
 }
