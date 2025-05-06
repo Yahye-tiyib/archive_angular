@@ -63,4 +63,24 @@ export class FichierService {
         throw error;
       });
   }
+  ajouterFichier(formData: FormData): Promise<any> {
+    return fetch(`${this.url}/ajouter`, {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erreur lors de l\'ajout du fichier');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Fichier ajouté:', data);
+        return data;
+      })
+      .catch(error => {
+        console.error('Erreur fetch ajout fichier:', error);
+        throw error;
+      });
+  }
 }

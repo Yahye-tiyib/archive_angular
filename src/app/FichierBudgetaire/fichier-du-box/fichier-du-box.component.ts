@@ -51,7 +51,7 @@ export class FichierDuBoxComponent {
   
   getFichierUrl(fichier: string): string {
     const filename = fichier.split('/').pop(); // Récupère juste le nom du fichier
-    return `http://localhost:8076/uploads/fichiers/${filename}`;
+    return `http://localhost:8070/uploads/fichiersBudgeters/${filename}`;
   }
 
 }

@@ -1,3 +1,5 @@
+
+<app-ajouter-fichier (fichierAdded)="onFichierAdded($event)"></app-ajouter-fichier>
 <div class="containere1">
   <h2>Liste des Fichiers Budgétaires</h2>
   <div class="table-responsive">
@@ -8,7 +10,6 @@
           <th>Fichier</th>
           <th>Date de Réception</th>
           <th>Traité</th>
-          <th>État</th>
           <th>Box liée</th>
           <th>Action</th>
         </tr>
@@ -24,7 +25,6 @@
           </td>
           <td>{{ fichier.dateReception }}</td>
           <td>{{ fichier.traiter ? 'Oui' : 'Non' }}</td>
-          <td>{{ fichier.etat ? 'Valide' : 'Invalide' }}</td>
           <td>{{ fichier.box?.nom || 'Non assignée' }}</td>
           <td>
             <button class="btn btn-warning btn-sm mr-4" >Modifier</button>
