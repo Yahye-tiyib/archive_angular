@@ -1,76 +1,87 @@
 <!-- Button pour ouvrir le Modal -->
- <div class="ajouter-fichier">
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajouterFichierModal">
-  Ajouter un Fichier
-</button>
+<div class="ajouter-fichier">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajouterFichierModal">
+    Ajouter un Fichier
+  </button>
 
-<!-- Modal -->
-<div class="modal fade" id="ajouterFichierModal" tabindex="-1" aria-labelledby="ajouterFichierModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-        <div class="modal-header">
-          <h5 class="modal-title" id="ajouterFichierModalLabel">Ajouter un Fichier Budgetaire</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-        </div>
-
-        <div class="modal-body">
-          <!-- Nom du fichier -->
-          <div class="mb-3">
-            <label for="nomfichier" class="form-label">Nom du fichier</label>
-            <input type="text" class="form-control" id="nomfichier" name="nomfichier" [(ngModel)]="fichier.nomfichier" required>
+  <!-- Modal -->
+  <div class="modal fade" id="ajouterFichierModal" tabindex="-1" aria-labelledby="ajouterFichierModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ajouterFichierModalLabel">Ajouter un Fichier Budgétaire</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
           </div>
 
-          <!-- Date de réception -->
-          <div class="mb-3">
-            <label for="dateReception" class="form-label">Date de réception</label>
-            <input type="date" class="form-control" id="dateReception" name="dateReception" [(ngModel)]="fichier.dateReception" required>
+          <div class="modal-body">
+            <!-- Nom du fichier -->
+            <div class="mb-3">
+              <label for="nomEtablissement" class="form-label">Nom de l'établissement</label>
+              <input type="text" class="form-control" id="nomEtablissement" name="nomEtablissement" [(ngModel)]="fichier.nomEtablissement" required>
+            </div>
+
+            <!-- Reference Lettre -->
+            <div class="mb-3">
+              <label for="referenceLettre" class="form-label">Référence de la Lettre</label>
+              <input type="text" class="form-control" id="referenceLettre" name="referenceLettre" [(ngModel)]="fichier.referenceLettre" required>
+            </div>
+
+            <!-- Objet -->
+            <div class="mb-3">
+              <label for="objet" class="form-label">Objet de la Lettre</label>
+              <input type="text" class="form-control" id="objet" name="objet" [(ngModel)]="fichier.objet" required>
+            </div>
+
+            <!-- Date de réception -->
+            <div class="mb-3">
+              <label for="dateReception" class="form-label">Date de réception</label>
+              <input type="date" class="form-control" id="dateReception" name="dateReception" [(ngModel)]="fichier.dateReception" required>
+            </div>
+
+            <!-- Traiter (checkbox) -->
+            <div class="form-check mb-3">
+              <input class="form-check-input" type="checkbox" id="traiter" name="traiter" [(ngModel)]="fichier.traiter">
+              <label class="form-check-label" for="traiter">
+                Traité
+              </label>
+            </div>
+
+            <!-- Sélectionner le fichier -->
+            <div class="mb-3">
+              <label for="file" class="form-label">Fichier</label>
+              <input class="form-control" type="file" id="file" (change)="onFileSelected($event)" required>
+            </div>
+
+            <!-- BoxId -->
+            <div class="mb-3">
+              <label for="boxId" class="form-label">Box</label>
+              <ng-select
+                id="boxId"
+                class="form-control"
+                [items]="boxes"
+                bindLabel="nom"
+                bindValue="id"
+                [(ngModel)]="fichier.boxId"
+                name="boxId"
+                placeholder="Sélectionnez une Box"
+                required
+                #boxId="ngModel">
+                <ng-template let-item="item">
+                  <div class="custom-item">
+                    <span class="item-label">{{ item.nom }}</span>
+                  </div>
+                </ng-template>
+              </ng-select>
+            </div>
+
           </div>
 
-          <!-- Traiter (checkbox) -->
-          <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="traiter" name="traiter" [(ngModel)]="fichier.traiter">
-            <label class="form-check-label" for="traiter">
-              Traité
-            </label>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
           </div>
-
-          <!-- Sélectionner le fichier -->
-          <div class="mb-3">
-            <label for="file" class="form-label">Fichier</label>
-            <input class="form-control" type="file" id="file" (change)="onFileSelected($event)" required>
-          </div>
-
-          <!-- BoxId -->
-          <div class="mb-3">
-            <label for="boxId" class="form-label">Box</label>
-            <ng-select
-              id="boxId"
-              class="form-control"
-              [items]="boxes"
-              bindLabel="nom"      
-              bindValue="id"        
-              [(ngModel)]="fichier.boxId"
-              name="boxId"
-              placeholder="Sélectionnez une Box"
-              required
-              #boxId="ngModel">
-              
-              <ng-template let-item="item">
-                <div class="custom-item">
-                  <span class="item-label">{{ item.nom }}</span> <!-- 🔥 afficher le nom du box -->
-                </div>
-              </ng-template>
-            </ng-select>
-          </div>
-          
-        </div>
-
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 </div>

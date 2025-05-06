@@ -1,38 +1,93 @@
 <div class="containere1">
-    <h2>Liste des Fichiers du  :  <b class="text-primary">{{ boxName }}</b></h2><br>
+  <h2>Liste des Fichiers du : <b class="text-primary">{{ boxName }}</b></h2><br>
+
+  <!-- Divs cliquables pour afficher -->
+  <div class="row justify-content-center mb-4">
+    <div class="col-md-4">
+      <div class="card p-3 text-center text-white bg-success small-card" (click)="toggleTraites()">
+        <h5>Fichiers Traités ✅</h5>
+        <p>{{ fichiersTraites.length }} fichiers</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card p-3 text-center text-white bg-danger small-card" (click)="toggleNonTraites()">
+        <h5>Fichiers Non Traités ❌</h5>
+        <p>{{ fichiersNonTraites.length }} fichiers</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Liste des Fichiers Traités -->
+  <div *ngIf="showTraites" class="mb-5 animate-slide">
+    <h3 class="text-success">Fichiers Traités ✅</h3>
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead class="thead-dark">
           <tr>
-            <th>Nom du fichier</th>
+            <th>Nom Établissement</th>
             <th>Fichier</th>
             <th>Date de Réception</th>
             <th>Traité</th>
-            <th>État</th>
             <th>Box liée</th>
+            <th>Référence Lettre</th>
+            <th>Objet</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let fichier of fichiers">
-            <td>{{ fichier.nomfichier }}</td>
-            <td>
-              <!-- Lien vers le fichier avec target="_blank" pour ouvrir dans un nouvel onglet -->
-              <a [href]="getFichierUrl(fichier.fichier)" target="_blank">
-                Ouvrir le fichier
-              </a>
-            </td>
+          <tr *ngFor="let fichier of fichiersTraites">
+            <td>{{ fichier.nomEtablissement }}</td>
+            <td><a [href]="getFichierUrl(fichier.fichier)" target="_blank">Ouvrir</a></td>
             <td>{{ fichier.dateReception }}</td>
             <td>{{ fichier.traiter ? 'Oui' : 'Non' }}</td>
-            <td>{{ fichier.etat ? 'Valide' : 'Invalide' }}</td>
             <td>{{ fichier.box?.nom || 'Non assignée' }}</td>
+            <td>{{ fichier.referenceLettre }}</td>
+            <td>{{ fichier.objet }}</td>
             <td>
-              <button class="btn btn-warning btn-sm mr-4" >Modifier</button>
-              <button class="btn btn-danger btn-sm" >Supprimer</button>
+              <button class="btn btn-warning btn-sm me-2">Modifier</button>
+              <button class="btn btn-danger btn-sm">Supprimer</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  
+
+  <!-- Liste des Fichiers Non Traités -->
+  <div *ngIf="showNonTraites" class="animate-slide">
+    <h3 class="text-danger">Fichiers Non Traités ❌</h3>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>Nom Établissement</th>
+            <th>Fichier</th>
+            <th>Date de Réception</th>
+            <th>Traité</th>
+            <th>Box liée</th>
+            <th>Référence Lettre</th>
+            <th>Objet</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let fichier of fichiersNonTraites">
+            <td>{{ fichier.nomEtablissement }}</td>
+            <td><a [href]="getFichierUrl(fichier.fichier)" target="_blank">Ouvrir</a></td>
+            <td>{{ fichier.dateReception }}</td>
+            <td>{{ fichier.traiter ? 'Oui' : 'Non' }}</td>
+            <td>{{ fichier.box?.nom || 'Non assignée' }}</td>
+            <td>{{ fichier.referenceLettre }}</td>
+            <td>{{ fichier.objet }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm me-2">Modifier</button>
+              <button class="btn btn-danger btn-sm">Supprimer</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

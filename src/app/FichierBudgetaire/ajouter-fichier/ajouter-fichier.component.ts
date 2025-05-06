@@ -13,11 +13,14 @@ import { NgSelectModule } from '@ng-select/ng-select';  // Importer le module Ng
   styleUrls: ['./ajouter-fichier.component.css']
 })
 export class AjouterFichierComponent implements OnInit {
+  // Mise à jour du modèle pour remplacer nomfichier par nomEtablissement
   fichier: any = {
-    nomfichier: '',
+    nomEtablissement: '',  // Nouveau champ
     dateReception: '',
     traiter: false,
-    boxId: ''
+    boxId: '',
+    referenceLettre: '',  // Nouveau champ
+    objet: ''  // Nouveau champ
   };
 
   selectedFile: File | null = null;
@@ -44,11 +47,15 @@ export class AjouterFichierComponent implements OnInit {
     }
 
     const formData = new FormData();
-    formData.append('nomfichier', this.fichier.nomfichier);
+    formData.append('nomEtablissement', this.fichier.nomEtablissement);  // Remplacer nomfichier par nomEtablissement
     formData.append('dateReception', this.fichier.dateReception);
     formData.append('traiter', this.fichier.traiter.toString());
     formData.append('boxId', this.fichier.boxId.toString());
     formData.append('file', this.selectedFile);
+
+    // Ajout des nouveaux champs dans FormData
+    formData.append('referenceLettre', this.fichier.referenceLettre);  // Ajouter la référence de la lettre
+    formData.append('objet', this.fichier.objet);  // Ajouter l'objet
 
     this.fichierService.ajouterFichier(formData)
       .then(data => {
@@ -64,7 +71,14 @@ export class AjouterFichierComponent implements OnInit {
         this.fichierAdded.emit(data);
 
         // Réinitialiser les champs
-        this.fichier = { nomfichier: '', dateReception: '', traiter: false, boxId: '' };
+        this.fichier = { 
+          nomEtablissement: '',  // Réinitialiser nomEtablissement
+          dateReception: '', 
+          traiter: false, 
+          boxId: '', 
+          referenceLettre: '',  // Réinitialiser referenceLettre
+          objet: ''  // Réinitialiser objet
+        };
         this.selectedFile = null;
 
         // Recharger la liste des fichiers
@@ -97,3 +111,5 @@ export class AjouterFichierComponent implements OnInit {
       });
   }
 }
+  
+
