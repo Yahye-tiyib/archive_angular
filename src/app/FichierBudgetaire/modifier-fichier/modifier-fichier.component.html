@@ -1,1 +1,70 @@
-<p>modifier-fichier works!</p>
+<!-- Modal de modification -->
+<div class="modal fade" id="modifierFichierModal" tabindex="-1" aria-labelledby="modifierFichierModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="onUpdate()" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modifierFichierModalLabel">Modifier le Fichier</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Identique au modal d'ajout mais avec [(ngModel)] sur un fichier existant -->
+
+          <div class="mb-3">
+            <label class="form-label">Nom de l'établissement</label>
+            <input type="text" class="form-control" [(ngModel)]="fichier.nomEtablissement" name="nomEtablissement" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Référence de la Lettre</label>
+            <input type="text" class="form-control" [(ngModel)]="fichier.referenceLettre" name="referenceLettre" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Objet de la Lettre</label>
+            <input type="text" class="form-control" [(ngModel)]="fichier.objet" name="objet" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Date de réception</label>
+            <input type="date" class="form-control" [(ngModel)]="fichier.dateReception" name="dateReception" required>
+          </div>
+
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="fichier.traiter" name="traiter">
+            <label class="form-check-label">Traité</label>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Fichier</label>
+            <input class="form-control" type="file" (change)="onFileSelected($event)">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Box</label>
+            <ng-select
+              [items]="boxes"
+              bindLabel="nom"
+              bindValue="id"
+              [(ngModel)]="fichier.boxId"
+              name="boxId"
+              placeholder="Sélectionnez une Box"
+              required>
+              <ng-template let-item="item">
+                <div class="custom-item">
+                  <span class="item-label">{{ item.nom }}</span>
+                </div>
+              </ng-template>
+            </ng-select>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Modifier</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

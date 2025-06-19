@@ -101,7 +101,7 @@ export class AjouterFichierComponent implements OnInit {
   }
 
   loadBoxes() {
-    this.boxService.getAllBoxes()
+    this.boxService.getBoxesOuvertes()
       .then(boxes => {
         this.boxes = boxes;
         console.log('Liste des boxes:', this.boxes);

@@ -1,5 +1,10 @@
 
 <app-ajouter-fichier (fichierAdded)="onFichierAdded($event)"></app-ajouter-fichier>
+<app-modifier-fichier
+  *ngIf="fichierAModifier"
+  [fichier]="fichierAModifier"
+  #modifierFichierModal>
+</app-modifier-fichier>
 <div class="containere1">
   <h2>Liste des Fichiers Budgétaires</h2>
   <div class="table-responsive">
@@ -31,7 +36,9 @@
           <td>{{ fichier.referenceLettre }}</td>
           <td>{{ fichier.objet }}</td>
           <td>
-            <button class="btn btn-warning btn-sm mr-4" >Modifier</button>
+            <button class="btn btn-warning btn-sm mr-4" data-bs-toggle="modal" data-bs-target="#modifierFichierModal" (click)="ouvrirModalModification(fichier)">
+              Modifier
+            </button>
             <button class="btn btn-danger btn-sm" >Supprimer</button>
           </td>
         </tr>

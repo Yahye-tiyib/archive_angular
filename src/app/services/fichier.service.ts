@@ -83,4 +83,11 @@ export class FichierService {
         throw error;
       });
   }
+
+  updateFichier(id: number, fichierData: FormData): Promise<any> {
+  return fetch(`${this.url}/modifier/${id}`, {
+    method: 'PUT',
+    body: fichierData
+  }).then(res => res.json());
+}
 }
