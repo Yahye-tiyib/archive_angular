@@ -14,6 +14,10 @@ export class BoxService {
     return fetch(`${this.baseUrl}/all`)
       .then(res => res.json());
   }
+  getBoxesOuvertes(): Promise<any[]> {
+  return fetch(`${this.baseUrl}/ouvertes`)
+    .then(res => res.json());
+  }
 
   // ✅ Ajouter une BoxMensuelle
   ajouterBox(box: any): Promise<any> {
