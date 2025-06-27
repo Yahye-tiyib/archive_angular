@@ -39,7 +39,7 @@
             <button class="btn btn-warning btn-sm mr-4" data-bs-toggle="modal" data-bs-target="#modifierFichierModal" (click)="ouvrirModalModification(fichier)">
               Modifier
             </button>
-            <button class="btn btn-danger btn-sm" >Supprimer</button>
+            <button class="btn btn-danger btn-sm" (click)="supprimerFichier(fichier.id)">Supprimer</button>
           </td>
         </tr>
       </tbody>

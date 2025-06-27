@@ -1,12 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';// adapte le chemin
+import { Component, Input, OnInit } from '@angular/core';
 import { BoxService } from '../../services/box.service';
 import { FichierService } from '../../services/fichier.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgSelectModule } from '@ng-select/ng-select'; 
+import { NgSelectModule } from '@ng-select/ng-select';
+
+declare var bootstrap: any; // Nécessaire pour utiliser Bootstrap JS
+
 @Component({
   selector: 'app-modifier-fichier',
-  imports:[CommonModule,FormsModule,NgSelectModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule, NgSelectModule],
   templateUrl: './modifier-fichier.component.html',
   styleUrls: ['./modifier-fichier.component.css']
 })
@@ -16,7 +20,10 @@ export class ModifierFichierComponent implements OnInit {
   selectedFile: File | null = null;
   boxes: any[] = [];
 
-  constructor(private boxService: BoxService, private fichierService: FichierService) { }
+  constructor(
+    private boxService: BoxService,
+    private fichierService: FichierService
+  ) {}
 
   ngOnInit(): void {
     this.loadBoxes();
@@ -24,12 +31,8 @@ export class ModifierFichierComponent implements OnInit {
 
   loadBoxes() {
     this.boxService.getBoxesOuvertes()
-      .then(boxes => {
-        this.boxes = boxes;
-      })
-      .catch(error => {
-        console.error('Erreur chargement boxes:', error);
-      });
+      .then(boxes => this.boxes = boxes)
+      .catch(error => console.error('Erreur chargement boxes:', error));
   }
 
   onFileSelected(event: any) {
@@ -51,15 +54,17 @@ export class ModifierFichierComponent implements OnInit {
 
     this.fichierService.updateFichier(this.fichier.id, formData)
       .then(response => {
-        const closeButton = document.querySelector('[data-bs-dismiss="modal"]') as HTMLElement;
-        if (closeButton) {
-          closeButton.click();
-        }
         console.log('Fichier mis à jour:', response);
-        // Optionnel : Fermer le modal ici
+
+        // ✅ Fermer le modal avec Bootstrap
+        const modalElement = document.getElementById('modifierFichierModal');
+        if (modalElement) {
+          const modalInstance = bootstrap.Modal.getInstance(modalElement);
+          if (modalInstance) {
+            modalInstance.hide();
+          }
+        }
       })
-      .catch(error => {
-        console.error('Erreur modification fichier:', error);
-      });
+      .catch(error => console.error('Erreur modification fichier:', error));
   }
 }

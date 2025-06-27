@@ -26,6 +26,21 @@ export class FichierService {
         throw error;
       });
   }
+  // 2. Supprimer un fichier par son ID
+    deleteFichier(id: number): Promise<void> {
+      return fetch(`${this.url}/supprimer/${id}`, {
+        method: 'DELETE'
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error("Erreur lors de la suppression du fichier");
+        }
+        console.log(`Fichier avec ID ${id} supprimé`);
+      }).catch(error => {
+        console.error('Erreur de suppression :', error);
+        throw error;
+      });
+    }
+
 
   // 2. Récupérer les fichiers d'un box donné
   getFichiersByBox(boxId: number): Promise<any> {

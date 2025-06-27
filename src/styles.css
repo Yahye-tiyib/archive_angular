@@ -25,3 +25,15 @@ ng-dropdown-panel .ng-option:hover {
   display: flex;
   align-items: center;
 }
+/* Personnaliser SweetAlert2 */
+.swal2-popup {
+  width: 380px !important;   /* ✅ Largeur personnalisée */
+  height: 400 !important;   /* Hauteur auto ou fixe si tu veux */
+  padding: 2em !important;   /* Optionnel : pour plus d’espace */
+  font-size: 1.1rem !important; /* Optionnel : pour agrandir le texte */
+}
+
+/* Exemple pour une boîte plus grande */
+.swal2-popup.swal2-toast {
+  width: 400px !important;
+}

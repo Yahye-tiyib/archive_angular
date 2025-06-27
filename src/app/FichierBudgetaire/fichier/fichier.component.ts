@@ -3,6 +3,8 @@ import { FichierService } from '../../services/fichier.service';
 import { CommonModule } from '@angular/common';
 import { AjouterFichierComponent } from '../ajouter-fichier/ajouter-fichier.component';
 import { ModifierFichierComponent } from '../modifier-fichier/modifier-fichier.component';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-fichier',
@@ -35,9 +37,48 @@ export class FichierComponent implements OnInit {
     this.fichiers = [...this.fichiers, nouveauFichier];
   }
 
+  supprimerFichier(id: number) {
+    Swal.fire({
+      title: 'Êtes-vous sûr ?',
+      text: 'Cette action supprimera définitivement le fichier.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Oui, supprimer',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.fichierService.deleteFichier(id)
+          .then(() => {
+            this.fichiers = this.fichiers.filter(f => f.id !== id);
+            Swal.fire(
+              'Supprimé !',
+              'Le fichier a été supprimé.',
+              'success'
+            );
+          })
+          .catch(error => {
+            console.error("Erreur lors de la suppression :", error);
+            Swal.fire(
+              'Erreur',
+              'Impossible de supprimer le fichier.',
+              'error'
+            );
+          });
+      }
+    });
+  }
+
+
+
   ouvrirModalModification(fichier: any) {
-  this.fichierAModifier = { ...fichier }; // On clone pour éviter de modifier la liste directement
+  this.fichierAModifier = {
+    ...fichier,
+    boxId: fichier.box?.id ?? null // 🟢 On extrait l'ID de la box si elle existe
+  };
 }
+
   
   
   
