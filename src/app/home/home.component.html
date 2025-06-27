@@ -1,0 +1,26 @@
+  <div class="margin_top ml-4 col-md-4 mb-3">
+      <input 
+        type="number" 
+        class="form-control" 
+        [(ngModel)]="annee__" 
+        (change)="loadBoxesByYear(annee__)"
+        placeholder="Entrez une année (ex: 2025)">
+  </div>
+<div class="continair">
+<div class="containere">
+  <h2>Nombre de fichiers par mois : {{ annee__ }}</h2>
+  <canvas #chartCanvas></canvas>
+</div>
+<div class="containere2">
+<h2>Statut des boxes</h2>
+<canvas #statutPieCanvas style="max-width: 400px; max-height:300px"></canvas>
+</div>
+<div class="containere1">
+<h2>Fichiers traités vs non traités : {{ annee__ }}</h2>
+<canvas #traitementChartCanvas></canvas>
+</div>
+<div class="containere3">
+  <h2>Top établissements</h2>
+  <canvas #topEtablissementsCanvas style="max-width: 900px;max-height:700px;margin-top:10%"></canvas>
+</div>
+</div>

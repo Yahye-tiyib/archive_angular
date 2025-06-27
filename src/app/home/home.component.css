@@ -1,0 +1,61 @@
+#chartCanvas {
+  width: 700px !important;
+  height: 400px !important;
+  display: block;
+}
+#traitementChartCanvas {
+  width: 700px !important;
+  height: 400px !important;
+  display: block;
+}
+.margin_top{
+    margin-top: 80px;
+}
+.continair{
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.containere{
+    width: 55%;    
+    height: 420px;
+    background-color: #fff;
+    margin-right: 20px;
+    /* margin-bottom: 10px; */
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+}
+
+.containere2{
+    width: 30%;
+    height: 420px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    background-color: #fff;
+    margin-right: 20px;
+    margin-bottom: 50px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+}
+.containere3{
+    width: 40%;
+    height: 420px;
+    background-color: #fff;
+    margin-right: 20px;
+    margin-bottom: 50px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+}
+
+.containere1{
+    width: 55%;    
+    height: 420px;
+    background-color: #fff;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+}

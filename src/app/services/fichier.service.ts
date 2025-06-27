@@ -90,4 +90,75 @@ export class FichierService {
     body: fichierData
   }).then(res => res.json());
 }
+
+getFichiersParMois(annee: number): Promise<Map<number, number>> {
+  return fetch(`${this.url}/statistiques/fichiers-par-mois?annee=${annee}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération des fichiers par mois');
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data;
+    })
+    .catch(error => {
+      console.error('Erreur fetch fichiers par mois:', error);
+      throw error;
+    });
+}
+
+
+getTraitementParMois(annee: number): Promise<Map<number, { traites: number, nonTraites: number }>> {
+  return fetch(`${this.url}/statistiques/traitement-par-mois?annee=${annee}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération du traitement par mois');
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data;
+    })
+    .catch(error => {
+      console.error('Erreur fetch traitement par mois:', error);
+      throw error;
+    });
+}
+
+
+getStatutBoxes(): Promise<Map<string, number>> {
+  return fetch(`${this.url}/statistiques/statut-boxes`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération des statuts des boxes');
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data;
+    })
+    .catch(error => {
+      console.error('Erreur fetch statut boxes:', error);
+      throw error;
+    });
+}
+
+getTopEtablissements(): Promise<Map<string, number>> {
+  return fetch(`${this.url}/statistiques/top-etablissements`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération du top des établissements');
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data;
+    })
+    .catch(error => {
+      console.error('Erreur fetch top établissements:', error);
+      throw error;
+    });
+}
+
 }

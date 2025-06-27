@@ -51,6 +51,10 @@ export class ModifierFichierComponent implements OnInit {
 
     this.fichierService.updateFichier(this.fichier.id, formData)
       .then(response => {
+        const closeButton = document.querySelector('[data-bs-dismiss="modal"]') as HTMLElement;
+        if (closeButton) {
+          closeButton.click();
+        }
         console.log('Fichier mis à jour:', response);
         // Optionnel : Fermer le modal ici
       })

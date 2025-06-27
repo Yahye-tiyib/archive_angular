@@ -5,6 +5,7 @@ import { authGuard } from './auth.guard';
 import { FichierComponent } from './FichierBudgetaire/fichier/fichier.component';
 import { LesBoxsComponent } from './Box/les-boxs/les-boxs.component';
 import { FichierDuBoxComponent } from './FichierBudgetaire/fichier-du-box/fichier-du-box.component';
+import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent, data: { showNavbar: false } },
@@ -13,6 +14,8 @@ export const routes: Routes = [
   { path: 'fichier/:id', component: FichierDuBoxComponent, canActivate: [authGuard], data: { showNavbar: true } },
 
   { path: 'boxs', component: LesBoxsComponent, canActivate: [authGuard], data: { showNavbar: true } },
+  { path: 'home', component: HomeComponent},
+
 
 
 ];
